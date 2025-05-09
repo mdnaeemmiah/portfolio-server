@@ -29,60 +29,60 @@ const register = catchAsync(async(req: Request, res: Response)=>{
   })
 })
 
-// const login = catchAsync(async(req: Request, res: Response)=>{
-//     const result = await AuthService.login(req.body);
+const login = catchAsync(async(req: Request, res: Response)=>{
+    const result = await AuthService.login(req.body);
 
-//     const { refreshToken, accessToken, needsPasswordChange } = result;
+    const { refreshToken, accessToken, needsPasswordChange } = result;
 
-//     res.cookie('refreshToken', refreshToken, {
-//       secure: config.NODE_ENV === 'production',
-//       httpOnly: true,
-//       sameSite: 'none',
-//       maxAge: 1000 * 60 * 60 * 24 * 365,
-//     });
+    res.cookie('refreshToken', refreshToken, {
+      secure: config.NODE_ENV === 'production',
+      httpOnly: true,
+      sameSite: 'none',
+      maxAge: 1000 * 60 * 60 * 24 * 365,
+    });
 
-//     sendResponse(res,{
-//         statusCode: StatusCodes.ACCEPTED,
-//         success: true,
-//         message: "User logged in successfully",
-//         data: {
-//             accessToken,
-//             needsPasswordChange,
-//         }
-//     })
-// })
+    sendResponse(res,{
+        statusCode: StatusCodes.ACCEPTED,
+        success: true,
+        message: "User logged in successfully",
+        data: {
+            accessToken,
+            needsPasswordChange,
+        }
+    })
+})
 
-const login = catchAsync(async (req: Request, res: Response) => {
-  const result = await AuthService.login(req.body);
+// const login = catchAsync(async (req: Request, res: Response) => {
+//   const result = await AuthService.login(req.body);
 
-  const { refreshToken, accessToken, needsPasswordChange } = result;
+//   const { refreshToken, accessToken, needsPasswordChange } = result;
 
-  // Set refreshToken in HTTP-only cookie
-  res.cookie("refreshToken", refreshToken, {
-    secure: config.NODE_ENV === "production", 
-    httpOnly: true,
-    sameSite: "none",
-    maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year
-  });
+//   // Set refreshToken in HTTP-only cookie
+//   res.cookie("refreshToken", refreshToken, {
+//     secure: config.NODE_ENV === "production", 
+//     httpOnly: true,
+//     sameSite: "none",
+//     maxAge: 1000 * 60 * 60 * 24 * 365, // 1 year
+//   });
 
-  // Set accessToken in a regular cookie
-  res.cookie("accessToken", accessToken, {
-    secure: config.NODE_ENV === "production",
-    sameSite: "strict",
-    httpOnly: false, // Make it accessible to JavaScript (not recommended for sensitive tokens)
-    maxAge: 1000 * 60 * 60 * 24, // 1 day
-  });
+//   // Set accessToken in a regular cookie
+//   res.cookie("accessToken", accessToken, {
+//     secure: config.NODE_ENV === "production",
+//     sameSite: "strict",
+//     httpOnly: false, // Make it accessible to JavaScript (not recommended for sensitive tokens)
+//     maxAge: 1000 * 60 * 60 * 24, // 1 day
+//   });
 
-  sendResponse(res, {
-    statusCode: StatusCodes.ACCEPTED,
-    success: true,
-    message: "User logged in successfully",
-    data: {
-      accessToken,
-      needsPasswordChange,
-    },
-  });
-});
+//   sendResponse(res, {
+//     statusCode: StatusCodes.ACCEPTED,
+//     success: true,
+//     message: "User logged in successfully",
+//     data: {
+//       accessToken,
+//       needsPasswordChange,
+//     },
+//   });
+// });
 
 const changePassword = catchAsync(async (req, res) => {
     const { ...passwordData } = req.body;
