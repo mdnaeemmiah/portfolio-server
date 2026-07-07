@@ -39,14 +39,21 @@ const getSingleUser = catchAsync(async (req, res) => {
 const updateUser = catchAsync(async (req, res) => {
   const {id} = req.params;
   const body = req.body;
-  const result = await userService.updateUser(id, body);
-
-  sendResponse(res, {
-    statusCode: StatusCodes.OK,
-    success: true,
-    message: 'User updated successfully',
-    data: result,
-  });
+  
+  try {
+    const result = await userService.updateUser(id, body);
+    sendResponse(res, {
+      statusCode: StatusCodes.OK,
+      success: true,
+      message: 'User updated successfully',
+      data: result,
+    });
+  } catch (error: any) {
+    throw new AppError(
+      StatusCodes.BAD_REQUEST,
+      error.message || 'Failed to update user'
+    );
+  }
 });
 
 export const deleteUser = catchAsync(async (req: Request, res: Response) => {

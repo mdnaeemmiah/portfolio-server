@@ -7,6 +7,8 @@ export const projectSchema = z.object({
   image: z.string().url("Invalid image URL"), // Validate that the image is a valid URL
   liveLink: z.string().url("Invalid live link URL"), // Validate the live link as a URL
   order: z.coerce.number().int().min(0, "Order must be 0 or greater").optional(),
+  frontendSource: z.string().url("Invalid frontend source URL").optional(),
+  backendSource: z.string().url("Invalid backend source URL").optional(),
 });
 
 // Zod schema for updating an existing project (fields are optional)
