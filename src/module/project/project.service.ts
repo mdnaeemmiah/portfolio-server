@@ -5,7 +5,7 @@ import { Project } from "./project.intarface";
 
 // Fetch all projects
 const getAllProjects = async () => {
-  const result = await ProjectModel.find();
+  const result = await ProjectModel.find().sort({ order: 1, createdAt: -1 });
   return result;
 };
 

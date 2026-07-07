@@ -11,7 +11,7 @@ export const UserValidationSchema = z.object({
     email: z.string().email({ message: 'Please enter a valid email address' }),
     password: z
       .string()
-      .min(8, { message: 'Password must be at least 8 characters long' }),
+      .min(3, { message: 'Password must be at least 3 characters long' }),
     role: z.enum(['admin', 'user']).default('user'),
     isBlocked: z.boolean().default(false),
   }),

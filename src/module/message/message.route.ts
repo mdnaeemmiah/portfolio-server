@@ -10,5 +10,8 @@ messageRoute.post("/create", messageController.createMessage);
 // Get all messages
 messageRoute.get("/", messageController.getAllMessages);
 
+// Delete message
+messageRoute.delete("/delete/:id", messageController.deleteMessage);
+
 
 export default messageRoute;

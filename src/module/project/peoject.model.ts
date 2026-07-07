@@ -9,6 +9,7 @@ const ProjectSchema = new Schema<Project>({
   description: { type: String, required: true },
   image: { type: String, required: true },
   liveLink: { type: String, required: true },
+  order: { type: Number, default: 0 },
 }, { timestamps: true });
 
 // Create the Project model based on the schema

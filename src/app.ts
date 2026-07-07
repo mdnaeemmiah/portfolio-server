@@ -17,7 +17,23 @@ const app: Application = express();
 app.use(express.json());
 app.use(cookieParser());
 
-app.use(cors({ origin: 'https://l2b4-a5-client.vercel.app', credentials: true }));
+const allowedOrigins = [
+  'https://l2b4-a5-client.vercel.app',
+  'http://localhost:3000',
+  'http://127.0.0.1:3000',
+];
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error('Not allowed by CORS'));
+    },
+    credentials: true,
+  })
+);
 
 // application routes
 app.use('/api', router);

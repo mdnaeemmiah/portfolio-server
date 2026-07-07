@@ -6,6 +6,7 @@ export const projectSchema = z.object({
   description: z.string().min(10, "Description must be at least 10 characters long"),
   image: z.string().url("Invalid image URL"), // Validate that the image is a valid URL
   liveLink: z.string().url("Invalid live link URL"), // Validate the live link as a URL
+  order: z.coerce.number().int().min(0, "Order must be 0 or greater").optional(),
 });
 
 // Zod schema for updating an existing project (fields are optional)

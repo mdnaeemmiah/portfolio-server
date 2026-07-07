@@ -15,8 +15,14 @@ const getAllMessages = async () => {
   return result;
 };
 
+const deleteMessage = async (id: string) => {
+  const result = await MessageModel.findByIdAndDelete(id);
+  return result;
+};
+
 
 export const messageService = {
   createMessage,
   getAllMessages,
+  deleteMessage,
 };

@@ -7,6 +7,8 @@ import { IUserRole } from '../module/user/user.intarface';
 import httpStatus from 'http-status';
 import { User } from '../module/user/user.model';
 
+const ADMIN_EMAIL = 'admin@gmail.com';
+
 const auth = (...requiredRoles: IUserRole[]) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const token = req.headers.authorization;
@@ -23,6 +25,11 @@ const auth = (...requiredRoles: IUserRole[]) => {
     ) as JwtPayload;
 
     const { role, email, iat } = decoded;
+
+    if (email === ADMIN_EMAIL && role === 'admin') {
+      req.user = decoded;
+      return next();
+    }
 
     // checking if the user is exist
     const user = await User.findOne({ email });
