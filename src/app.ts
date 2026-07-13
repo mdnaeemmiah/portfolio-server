@@ -19,7 +19,7 @@ app.use(cookieParser());
 
 const allowedOrigins = [
   'https://l2b4-a5-client.vercel.app',
-  'http://localhost:3000',
+  'http://localhost:3002',
   'http://127.0.0.1:3000',
 ];
 
