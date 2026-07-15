@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 const allowedOrigins = [
-  'https://l2b4-a5-client.vercel.app',
+  'https://portfolio-one-ochre-74.vercel.app',
   'http://localhost:3002',
   'http://127.0.0.1:3000',
 ];
